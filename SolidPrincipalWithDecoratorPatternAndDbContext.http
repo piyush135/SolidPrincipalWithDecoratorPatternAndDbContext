@@ -1,0 +1,6 @@
+@SolidPrincipalWithDecoratorPatternAndDbContext_HostAddress = http://localhost:5187
+
+GET {{SolidPrincipalWithDecoratorPatternAndDbContext_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
