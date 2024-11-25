@@ -17,10 +17,25 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDBContext, NoSqlDbContext>(); // Register NoSQL DB Context
-builder.Services.AddScoped<IDBContext, SqlDbContext>();   // Register SQL DB Context
+/*builder.Services.AddScoped<IDBContext, SqlDbContext>();   */// Register SQL DB Context
 builder.Services.AddScoped(typeof(IRepository<>), typeof(SqlRepository<>)); // Default SQL Repository
 builder.Services.AddScoped(typeof(NoSqlRepository<>)); // Direct NoSQL Repository
 builder.Services.AddScoped<RepositoryFactory>(); // Repository Factory
+builder.Services.AddScoped<IDBContext>(provider =>
+{
+    var useSql = builder.Configuration.GetValue<bool>("UseSqlDatabase");
+
+    if (useSql)
+    {
+        var dbContext = provider.GetRequiredService<DbContext>();
+        return new SqlDbContext(dbContext);
+    }
+    else
+    {
+        var mongoDatabase = provider.GetRequiredService<IMongoDatabase>();
+        return new NoSqlDbContext(mongoDatabase);
+    }
+});
 
 var app = builder.Build();
 
