@@ -40,6 +40,7 @@ This project demonstrates the **SOLID principles** using a **generic DbContext**
 
 6. **Service Layer**
    - Contains business logic, abstracts database details, and connects the controller to repositories.
+   - Implements the Strategy Pattern for tenant-specific payment strategies.
 
 7. **Controller**
    - Handles API requests and interacts with the service layer.
