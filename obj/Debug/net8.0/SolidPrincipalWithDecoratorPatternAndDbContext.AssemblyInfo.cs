@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SolidPrincipalWithDecoratorPatternAndDbContext")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+841add11274fa6ea4bf32cfd2cef8ecb87f428fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25532e843ff944884cce8b635f3fad4fa9204bd6")]
 [assembly: System.Reflection.AssemblyProductAttribute("SolidPrincipalWithDecoratorPatternAndDbContext")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SolidPrincipalWithDecoratorPatternAndDbContext")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
