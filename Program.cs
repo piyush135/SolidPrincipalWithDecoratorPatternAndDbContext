@@ -3,7 +3,10 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using SolidPrincipalWithDecoratorPatternAndDbContext.Decorator;
 using SolidPrincipalWithDecoratorPatternAndDbContext.Factory;
+using SolidPrincipalWithDecoratorPatternAndDbContext.Provider;
 using SolidPrincipalWithDecoratorPatternAndDbContext.Repository;
+using SolidPrincipalWithDecoratorPatternAndDbContext.Service;
+using SolidPrincipalWithDecoratorPatternAndDbContext.Strategy;
 using SolidPrincipalWithGenericDbContext.DbContext;
 using SolidPrincipalWithGenericDbContext.Repository;
 
@@ -21,6 +24,7 @@ builder.Services.AddScoped<IDBContext, NoSqlDbContext>(); // Register NoSQL DB C
 builder.Services.AddScoped(typeof(IRepository<>), typeof(SqlRepository<>)); // Default SQL Repository
 builder.Services.AddScoped(typeof(NoSqlRepository<>)); // Direct NoSQL Repository
 builder.Services.AddScoped<RepositoryFactory>(); // Repository Factory
+builder.Services.AddScoped<ITenantConfigurationProvider, TenantConfigurationProvider>();
 builder.Services.AddScoped<IDBContext>(provider =>
 {
     var useSql = builder.Configuration.GetValue<bool>("UseSqlDatabase");
@@ -36,6 +40,13 @@ builder.Services.AddScoped<IDBContext>(provider =>
         return new NoSqlDbContext(mongoDatabase);
     }
 });
+
+// Added strategy 
+builder.Services.AddScoped<CreditCardPaymentStrategy>();
+builder.Services.AddScoped<PayPalPaymentStrategy>();
+builder.Services.AddScoped<UPIStrategy>();
+builder.Services.AddScoped<IPaymentStrategyFactory, PaymentStrategyFactory>();
+builder.Services.AddScoped<PaymentService>();
 
 var app = builder.Build();
 
